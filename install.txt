@@ -1,0 +1,2 @@
+pip install IPython open3d opencv-python matplotlib numpy==1.21 pypotree portpicker
+pip install --upgrade packaging pyzmq==24
