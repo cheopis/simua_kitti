@@ -16,8 +16,6 @@ from ultralytics.utils import ASSETS, yaml_load
 
 from LiDAR2Camera import LiDAR2Camera
 
-from segmentation import YOLOv8Seg
-
 # LOAD THE FILES FROM KITTI DATASET
 #   
 folder =  os.getcwd() + '/2011_09_26_drive_0084_sync'
@@ -82,19 +80,3 @@ fig_camera = plt.figure(figsize=(14, 7))
 ax_lidar = fig_camera.subplots()
 ax_lidar.imshow(image)
 plt.show()
-
-# parser = argparse.ArgumentParser()
-# parser.add_argument("--model", type=str, default='data/yolov4.onnx', help="Path to ONNX model")
-# #parser.add_argument("--source", type=str, default=str(ASSETS / img), help="Path to input image")
-# parser.add_argument("--conf", type=float, default=0.25, help="Confidence threshold")
-# parser.add_argument("--iou", type=float, default=0.45, help="NMS IoU threshold")
-# args = parser.parse_args()
-
-# model = YOLOv8Seg(args.model)
-
-# # Inference
-# boxes, segments, _ = model(image, conf_threshold=args.conf, iou_threshold=args.iou)
-
-# # Draw bboxes and polygons
-# if len(boxes) > 0:
-#     model.draw_and_visualize(image, boxes, segments, vis=False, save=True)
