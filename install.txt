@@ -1,2 +1,4 @@
-pip install IPython open3d opencv-python matplotlib numpy==1.21 pypotree portpicker
+pip install IPython open3d opencv-python matplotlib numpy==1.21 pypotree portpicker tensorflow ultralytics
 pip install --upgrade packaging pyzmq==24
+
+pip install open3d opencv-python Pillow tensorflow ultralytics onnx onnxslim onnxruntime-gpu

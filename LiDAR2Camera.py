@@ -12,10 +12,10 @@ class LiDAR2Camera(object):
             # ['calib/calib_cam_to_cam.txt', 'calib/calib_imu_to_velo.txt', 'calib/calib_velo_to_cam.txt']
         
         'CALIB CAM TO CAM'
-        P = calibs[0]["P_rect_02"]
+        P = calibs[0]["P_rect_00"]
         self.P = np.reshape(P, [3, 4])
         # Rotation from reference camera coord to rect camera coord
-        R0 = calibs[0]["R_rect_02"]
+        R0 = calibs[0]["R_rect_00"]
         self.R0 = np.reshape(R0, [3, 3])
 
         'CALIB VELO TO CAM'
@@ -54,6 +54,7 @@ class LiDAR2Camera(object):
         Input: 3D points in Velodyne coord [nx3]
         Output: 3D points in Camera coord [nx3]
         '''
+        print(pts_3d_velo)
         self.V2C = np.column_stack((self.R, self.T)) # RT
 
         # NORMAL TECHNIQUE
@@ -61,7 +62,7 @@ class LiDAR2Camera(object):
         R0_homo_2 = np.column_stack([R0_homo, [0, 0, 0, 1]])
         p_r0 = np.dot(self.P, R0_homo_2) #PxR0
         p_r0_rt =  np.dot(p_r0, np.vstack((self.V2C, [0, 0, 0, 1]))) #PxROxRT
-        pts_3d_homo = np.column_stack([pts_3d_velo, np.ones((pts_3d_velo.shape[0],1))])
+        pts_3d_homo = np.column_stack([pts_3d_velo, np.ones((1,1))])
         p_r0_rt_x = np.dot(p_r0_rt, np.transpose(pts_3d_homo))#PxROxRTxX
         pts_2d = np.transpose(p_r0_rt_x)
         
